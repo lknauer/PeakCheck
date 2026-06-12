@@ -1,0 +1,27 @@
+cff-version: 1.2.0
+title: "PeakCheck: interactive multi-peak fitting and peak-presence checking for x/y data"
+message: "If you use this software, please cite it as below."
+type: software
+authors:
+  - given-names: Lukas
+    family-names: Knauer
+    affiliation: "RPTU Kaiserslautern-Landau, AG Schünemann"
+version: 1.0.0
+date-released: 2026-06-01
+license: MIT
+repository-code: "https://github.com/lknauer/PeakCheck"
+keywords:
+  - peak fitting
+  - Voigt profile
+  - NNLS
+  - spectroscopy
+  - NIS
+  - NRVS
+  - pDOS
+abstract: >-
+  PeakCheck determines peaks in a reference x/y data set (e.g. a summed
+  spectrum) and checks whether those peaks are present in one or more component
+  data sets (e.g. sub-spectra). It uses area-normalised Voigt/Gaussian/Lorentzian
+  profiles (true Voigt via the Faddeeva function), rolling-minimum background
+  subtraction and a weighted non-negative least-squares amplitude fit, and ships
+  with a Tkinter GUI and a TOML-driven headless mode.

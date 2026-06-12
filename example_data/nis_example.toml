@@ -1,0 +1,52 @@
+# PeakCheck configuration
+# Generated template - edit and pass with:  peakcheck.py --config nis_example.toml
+#
+# Tip: an empty string "" means "unset" for x_min / x_max.
+
+[input]
+reference_file = "sample.nis"    # data set in which the peaks are defined
+component_glob = ""    # glob for component sets; "" = auto "<stem>_*.<ext>"
+error_column = "auto"    # "auto" | "none" | 0-based column index
+
+[xaxis]
+x_conversion = "meV -> cm^-1"    # named preset, e.g. "meV -> cm^-1" or "nm -> eV (reciprocal)"; "" = none
+x_transform = "affine"    # "affine" (x*scale+offset) | "reciprocal" (scale/x+offset)
+x_scale = 8.065544    # affine: factor (8.065544 = meV -> cm^-1); reciprocal: numerator
+x_offset = 0.0
+x_label = "Wavenumber"
+y_label = "y"
+x_unit = "cm-1"
+
+[profile]
+profile = "voigt"    # "voigt" | "gauss" | "lorentz" (Voigt is a true Voigt)
+wg = 7.8701    # Gaussian FWHM (width of the G part / of a pure Gaussian)
+wl = 1.094    # Lorentzian FWHM (width of the L part / of a pure Lorentzian)
+
+[window]
+x_min = 100    # lower search bound; "" = open
+x_max = 200    # upper search bound; "" = open
+
+[search]
+bg_window = 30    # rolling-minimum window in points; 0 = off
+prominence_init = 150
+distance_init = 3
+min_snr_init = 3.0
+
+[presence]
+tolerance = 5.0    # +/- position window for the presence check (x units)
+snr_thresh = 5.0    # min signal/error ratio to count a peak as present
+
+[errors]
+error_mode = "statistical"    # "statistical" (true 1-sigma) | "scaled" (x sqrt(chi2_red))
+
+[output]
+write_csv = true
+write_excel = true
+plot_dpi = 150
+
+# Optional: fix the peak positions (x values) instead of
+# picking them interactively. Leave empty to search/pick.
+# peaks = [120.0, 150.0, 175.0]
+
+# Peaks fixed for this example (cm-1); remove to search/pick instead:
+peaks = [112.0, 128.0, 151.0, 168.0, 190.0]

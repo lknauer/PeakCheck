@@ -1,0 +1,8 @@
+numpy>=1.22
+scipy>=1.8
+matplotlib>=3.5
+openpyxl>=3.0
+# tomli is only needed on Python < 3.11 (3.11+ has tomllib in the stdlib)
+tomli>=2.0; python_version < "3.11"
+# tkinter ships with the official Python installer on Windows/macOS;
+# on Debian/Ubuntu install the system package python3-tk.

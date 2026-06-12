@@ -1,0 +1,123 @@
+% =====================================================================
+%  PeakCheck — shared LaTeX preamble
+%  Used by:  Anleitung_PeakCheck.tex (DE), Manual_PeakCheck_EN.tex (EN),
+%            Supplement_PeakCheck_EN.tex (EN)
+%
+%  Set the document language BEFORE \input{preamble.tex}, e.g.
+%      \def\peakchecklang{english}   % or:  \def\peakchecklang{ngerman}
+%  Engine: pdflatex.  Bibliography: bibtex + natbib (plainnat).
+% =====================================================================
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\providecommand{\peakchecklang}{english}
+% Graceful fallback: if the requested German babel files are absent (minimal
+% TeX Live), fall back to english so the file still compiles. A full TeX Live /
+% Overleaf has texlive-lang-german, so there the document stays German.
+\def\pklangde{ngerman}
+\ifx\peakchecklang\pklangde
+  \IfFileExists{ngermanb.ldf}{}{\def\peakchecklang{english}}
+\fi
+\usepackage[\peakchecklang]{babel}
+\IfFileExists{lmodern.sty}{\usepackage{lmodern}}{}
+
+\usepackage[a4paper,margin=2.3cm]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{ragged2e}
+\usepackage{enumitem}
+\usepackage{caption}
+\usepackage[numbers,sort&compress]{natbib}
+\IfFileExists{microtype.sty}{\usepackage[protrusion=true,expansion=false]{microtype}}{}
+
+% hyperref last
+\usepackage[colorlinks=true,linkcolor=pkblue,citecolor=pkblue,urlcolor=pkblue]{hyperref}
+
+% --- colours ---------------------------------------------------------
+\definecolor{pkblue}{HTML}{1F4E79}
+\definecolor{pkaccent}{HTML}{C55A11}
+\definecolor{codebg}{HTML}{F4F6F8}
+\definecolor{codeframe}{HTML}{D6DEE6}
+\definecolor{kw}{HTML}{0B5394}
+\definecolor{str}{HTML}{7F6000}
+\definecolor{cmt}{HTML}{6A737D}
+\definecolor{hdrgray}{HTML}{555555}
+
+% --- captions --------------------------------------------------------
+\captionsetup{font=small,labelfont=bf,labelsep=period}
+
+% --- listings: Python -----------------------------------------------
+\lstdefinestyle{py}{%
+  language=Python,
+  basicstyle=\ttfamily\footnotesize,
+  keywordstyle=\color{kw}\bfseries,
+  stringstyle=\color{str},
+  commentstyle=\color{cmt}\itshape,
+  numberstyle=\tiny\color{cmt},
+  backgroundcolor=\color{codebg},
+  frame=single,
+  framerule=0.4pt,
+  rulecolor=\color{codeframe},
+  showstringspaces=false,
+  breaklines=true,
+  breakatwhitespace=true,
+  columns=fullflexible,
+  keepspaces=true,
+  tabsize=4,
+  xleftmargin=10pt,
+  xrightmargin=4pt,
+  aboveskip=2pt,
+  belowskip=10pt,
+}
+
+% --- listings: TOML / console (generic, '#' comments) ---------------
+\lstdefinestyle{conf}{%
+  basicstyle=\ttfamily\footnotesize,
+  keywordstyle=\color{kw},
+  commentstyle=\color{cmt}\itshape,
+  morecomment=[l]{\#},
+  morestring=[b]",
+  stringstyle=\color{str},
+  backgroundcolor=\color{codebg},
+  frame=single,
+  framerule=0.4pt,
+  rulecolor=\color{codeframe},
+  showstringspaces=false,
+  breaklines=true,
+  columns=fullflexible,
+  keepspaces=true,
+  xleftmargin=10pt,
+  xrightmargin=4pt,
+  aboveskip=2pt,
+  belowskip=10pt,
+}
+
+% --- helper macros ---------------------------------------------------
+% inline monospace (detokenize so _, #, & etc. need no escaping)
+\newcommand{\code}[1]{\texttt{\detokenize{#1}}}
+% header line shown above a code listing: module path + function
+\newcommand{\codehdr}[1]{\par\smallskip\noindent
+  {\small\ttfamily\color{hdrgray}#1}\par\nobreak\vspace{1pt}}
+% a "source / code reference" margin-style note inline
+\newcommand{\srcref}[1]{\textnormal{\small\color{hdrgray}(#1)}}
+
+% nicer default spacing for itemize
+\setlist[itemize]{leftmargin=1.4em,topsep=2pt,itemsep=1pt}
+\setlist[enumerate]{leftmargin=1.6em,topsep=2pt,itemsep=2pt}
+
+% table helpers
+\newcolumntype{L}{>{\RaggedRight\arraybackslash}X}
+\renewcommand{\arraystretch}{1.15}
+
+% section formatting (lightweight; optional package)
+\IfFileExists{sectsty.sty}{\usepackage{sectsty}\allsectionsfont{\color{pkblue}}}{}
+
+\setlength{\parskip}{0.4em}
+\setlength{\parindent}{0pt}

@@ -1,0 +1,65 @@
+# PeakCheck configuration
+# Generated template - edit and pass with:  peakcheck.py --config peakcheck_template.toml
+#
+# Tip: an empty string "" means "unset" for x_min / x_max.
+
+[input]
+reference_file = "data.txt"    # data set in which the peaks are defined
+component_glob = ""    # glob for component sets; "" = auto "<stem>_*.<ext>"
+error_column = "auto"    # "auto" | "none" | 0-based column index
+fio_x_column = ""    # FIO only: x column name or 1-based index; "" = first column
+fio_y_column = "nisp"    # FIO only: y column name or 1-based index (e.g. "nisp", "nfsp")
+
+[xaxis]
+x_conversion = ""    # named preset, e.g. "meV -> cm^-1" or "nm -> eV (reciprocal)"; "" = none
+x_transform = "affine"    # "affine" (x*scale+offset) | "reciprocal" (scale/x+offset)
+x_scale = 1.0    # affine: factor (8.065544 = meV -> cm^-1); reciprocal: numerator
+x_offset = 0.0
+x_label = "x"
+y_label = "y"
+x_unit = ""
+
+[profile]
+profile = "voigt"    # "voigt" | "gauss" | "lorentz" (Voigt is a true Voigt)
+wg = 7.8701    # Gaussian FWHM (width of the G part / of a pure Gaussian)
+wl = 1.094    # Lorentzian FWHM (width of the L part / of a pure Lorentzian)
+
+[window]
+x_min = ""    # lower search bound; "" = open
+x_max = ""    # upper search bound; "" = open
+
+[search]
+bg_window = 30    # rolling-minimum window in points; 0 = off
+baseline_method = "rolling_min"    # "rolling_min" | "polynomial" | "als" (asymmetric least squares)
+baseline_poly_order = 3    # order for the polynomial baseline
+baseline_als_lambda = 100000.0    # ALS smoothness (larger = stiffer baseline)
+baseline_als_p = 0.01    # ALS asymmetry (smaller = baseline hugs the lower envelope)
+prominence_init = 200.0
+distance_init = 3
+min_snr_init = 2.0
+
+[refine]
+refine = false    # refine peak positions by a bounded nonlinear fit after the NNLS
+refine_window = 3.0    # maximum position shift in x units when refine = true
+refine_widths = false    # also refine per-peak widths (bounded) after the NNLS
+width_mode = "fwhm"    # "fwhm" (scale whole Voigt) | "sigma" (Gaussian part only)
+width_min_factor = 1.0    # lower width bound as a factor of the instrumental width (1.0 = instrument)
+width_max_factor = 2.0    # upper width bound as a factor of the instrumental width (e.g. 2.0 = up to 2x)
+
+[presence]
+tolerance = 5.0    # +/- position window for the presence check (x units)
+snr_thresh = 2.0    # min signal/error ratio to count a peak as present
+presence_baseline_corrected = true    # true: SNR on background-corrected signal (recommended); false: on raw signal
+
+[errors]
+error_mode = "statistical"    # "statistical" (true 1-sigma) | "scaled" (x sqrt(chi2_red))
+
+[output]
+output_dir = ""    # where to write results; "" = next to the reference file
+write_csv = true
+write_excel = true
+plot_dpi = 150
+
+# Optional: fix the peak positions (x values) instead of
+# picking them interactively. Leave empty to search/pick.
+# peaks = [120.0, 150.0, 175.0]

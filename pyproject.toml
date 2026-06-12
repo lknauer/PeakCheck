@@ -1,0 +1,51 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "peakcheck"
+version = "1.0.0"
+description = "Interactive multi-peak fitting and peak-presence checking for generic x/y data"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Lukas Knauer" }]
+keywords = ["peak fitting", "Voigt", "NNLS", "spectroscopy", "NIS", "NRVS", "pDOS"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "License :: OSI Approved :: MIT License",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering :: Physics",
+    "Topic :: Scientific/Engineering :: Chemistry",
+]
+dependencies = [
+    "numpy>=1.22",
+    "scipy>=1.8",
+    "matplotlib>=3.5",
+    "openpyxl>=3.0",
+    "tomli>=2.0; python_version < '3.11'",
+]
+
+[project.optional-dependencies]
+test = ["pytest>=7.0"]
+
+[project.scripts]
+peakcheck = "peakcheck.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/lknauer/PeakCheck"
+Repository = "https://github.com/lknauer/PeakCheck"
+Issues = "https://github.com/lknauer/PeakCheck/issues"
+
+# Package layout: the peakcheck/ directory holds the source. peakcheck.py at
+# the project root is a thin backwards-compatible launcher and not part of the
+# installed wheel.
+[tool.setuptools]
+packages = ["peakcheck"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

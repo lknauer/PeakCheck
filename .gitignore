@@ -1,0 +1,44 @@
+# Python
+__pycache__/
+*.pyc
+*.egg-info/
+build/
+dist/
+.venv/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Editors / OS
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+
+# LaTeX build artefacts (sources are tracked, build products are not)
+*.aux
+*.log
+*.out
+*.toc
+*.bbl
+*.blg
+*.synctex.gz
+*.fdb_latexmk
+*.fls
+
+# Generated analysis outputs (run artefacts produced next to data files).
+# These patterns intentionally do NOT cover the committed documentation
+# figures, which are re-included below.
+*_results.xlsx
+*_results.csv
+*_fit.png
+*_peaks.png
+*_intensities.csv
+*_positions.csv
+*_presence.csv
+*_fit.csv
+
+# Keep the committed documentation figures even though some match *_fit.png
+!docs/latex/figures/
+!docs/latex/figures/fig_*.png

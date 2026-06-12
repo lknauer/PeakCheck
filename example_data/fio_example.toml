@@ -1,0 +1,25 @@
+# PeakCheck example for a DESY/PETRA-III .fio file.
+# This is synthetic demonstration data (not a real measurement); its purpose is
+# to show how a .fio file is read and how the x/y columns are selected, not to
+# be a perfect fit. The bands are slightly broader than the instrumental width,
+# so try enabling width refinement ([refine] refine_widths = true) to see the
+# fit improve. Run from anywhere:
+#   peakcheck --config fio_example.toml --no-gui
+[input]
+reference_file = "fio_example.fio"
+fio_x_column = "hrm_ener2"   # energy axis (or "" = first column)
+fio_y_column = "nisp"        # NIS signal column (try "nfsp" too)
+
+[profile]
+profile = "voigt"
+wg = 7.8701
+wl = 1.094
+
+[search]
+prominence_init = 4000
+bg_window = 40
+min_snr_init = 3.0
+
+[window]
+x_min = 10.0
+x_max = 90.0

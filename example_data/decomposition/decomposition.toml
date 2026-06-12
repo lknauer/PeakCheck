@@ -1,0 +1,52 @@
+# PeakCheck worked example: one total spectrum described by 10 sub-spectra.
+#
+# The total spectrum (spectrum.dat) is the SUM of 10 sub-spectra
+# (spectrum_01.dat ... spectrum_10.dat). Eight vibrational bands are defined on
+# the total; PeakCheck then checks which of those bands each sub-spectrum
+# actually contains. Many sub-spectra are MISSING several bands -- exactly the
+# question the presence check answers (green = present, red = absent).
+#
+# Run from this folder:
+#   peakcheck --config decomposition.toml --no-gui
+# or open spectrum.dat in the GUI and Load this config.
+
+[input]
+reference_file = "spectrum.dat"   # the total; peaks are defined here
+component_glob = ""               # auto -> spectrum_*.dat (the 10 sub-spectra)
+error_column = "auto"             # 3rd column holds the 1-sigma errors
+
+[xaxis]
+x_conversion = ""                 # data already in cm^-1, no conversion
+x_label = "Wavenumber"
+y_label = "NRVS intensity"
+x_unit = "cm-1"
+
+[profile]
+profile = "voigt"
+wg = 18.0                         # Gaussian FWHM (cm^-1)
+wl = 4.0                          # Lorentzian FWHM (cm^-1); eff. FWHM ~20
+
+[window]
+x_min = ""                        # use the full range
+x_max = ""
+
+[search]
+bg_window = 0                     # clean baseline, no subtraction needed
+prominence_init = 200
+distance_init = 3
+min_snr_init = 3.0
+
+[presence]
+tolerance = 12.0                  # +/- window around each band (cm^-1)
+snr_thresh = 5.0                  # min signal/error to count a band as present
+
+[errors]
+error_mode = "statistical"        # real 1-sigma errors are provided
+
+[output]
+write_csv = true
+write_excel = true
+plot_dpi = 150
+
+# The eight bands of the total spectrum (cm^-1), defined explicitly:
+peaks = [110.0, 165.0, 215.0, 270.0, 330.0, 385.0, 450.0, 525.0]
