@@ -1,6 +1,7 @@
 # PeakCheck
 
 [![tests](https://github.com/lknauer/PeakCheck/actions/workflows/tests.yml/badge.svg)](https://github.com/lknauer/PeakCheck/actions/workflows/tests.yml)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20836679.svg)](https://doi.org/10.5281/zenodo.20836679)
 
 Interactive multi-peak fitting and peak-presence checking for generic x/y data.
 

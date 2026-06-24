@@ -7,9 +7,17 @@ authors:
     family-names: Knauer
     affiliation: "RPTU Kaiserslautern-Landau, AG Schünemann"
 version: 1.0.0
-date-released: 2026-06-01
+date-released: 2026-06-24
 license: MIT
+doi: 10.5281/zenodo.20836680
 repository-code: "https://github.com/lknauer/PeakCheck"
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.20836680
+    description: "DOI of version 1.0.0 (this release)"
+  - type: doi
+    value: 10.5281/zenodo.20836679
+    description: "Concept DOI (always resolves to the latest version)"
 keywords:
   - peak fitting
   - Voigt profile
